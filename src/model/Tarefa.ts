@@ -1,5 +1,4 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
-import { TarefaAttributes, TarefaCreationAttributes } from './interfaces/TarefaTypes'; // Ajuste o caminho conforme necessário
 import { initializeDb } from '../config/configDb'; // Ajuste o caminho conforme necessário
 
 // Obtém a instância do Sequelize usando a função initializeDb
@@ -12,39 +11,14 @@ const sequelize: Sequelize = initializeDb();
  * @description O modelo Tarefa mapeia a tabela `tarefas` no banco de dados e inclui os métodos de acesso e manipulação
  *              dos registros dessa tabela.
  */
-class Tarefa extends Model<TarefaAttributes, TarefaCreationAttributes> implements TarefaAttributes {
-    /**
-     * O identificador único da tarefa.
-     *
-     * @type {number}
-     * @memberof Tarefa
-     */
+class Tarefa extends Model {
+
     public id!: number;
-
-    /**
-     * O título da tarefa.
-     *
-     * @type {string}
-     * @memberof Tarefa
-     */
     public titulo!: string;
-
-    /**
-     * A descrição detalhada da tarefa.
-     *
-     * @type {string}
-     * @memberof Tarefa
-     */
     public descricao!: string;
-
-    /**
-     * O status da tarefa (concluída ou não).
-     *
-     * @type {boolean}
-     * @memberof Tarefa
-     */
     public status!: boolean;
 }
+
 
 /**
  * Inicializa o modelo Tarefa.
@@ -54,6 +28,7 @@ class Tarefa extends Model<TarefaAttributes, TarefaCreationAttributes> implement
  *
  * @param sequelize - Instância do Sequelize utilizada para conectar ao banco de dados.
  */
+
 Tarefa.init({
     /**
      * O identificador único da tarefa.
@@ -84,6 +59,7 @@ Tarefa.init({
      * @type {DataTypes.TEXT}
      * @memberof Tarefa
      */
+
     descricao: {
         type: DataTypes.TEXT,
         allowNull: true,
