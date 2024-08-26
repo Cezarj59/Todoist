@@ -7,9 +7,10 @@ const sequelize: Sequelize = initializeDb();
 /**
  * Representa uma tarefa no sistema.
  *
- * @extends Model<TarefaAttributes, TarefaCreationAttributes>
- * @description O modelo Tarefa mapeia a tabela `tarefas` no banco de dados e inclui os métodos de acesso e manipulação
- *              dos registros dessa tabela.
+ * @description O modelo `Tarefa` mapeia a tabela `tarefas` no banco de dados e define os atributos `id`, `titulo`,
+ *              `descricao` e `status`, correspondentes às colunas dessa tabela. Além disso, o modelo herda métodos
+ *              do Sequelize para criar, ler, atualizar e excluir registros de tarefas, permitindo manipulação fácil
+ *              dos dados da tabela.
  */
 class Tarefa extends Model {
 
