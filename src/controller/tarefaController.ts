@@ -15,15 +15,16 @@ import {Op} from 'sequelize';
  */
 export const createTarefa = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { titulo, descricao, status} = req.body;
+        const { titulo, descricao, status } = req.body;
 
-        const novaTarefa = await Tarefa.create({ titulo, descricao, status});
+        await Tarefa.create({ titulo, descricao, status });
 
-        res.status(201).json(novaTarefa);
+        res.status(201).json({ message: 'Tarefa criada com sucesso' });
     } catch (error: any) {
-        res.status(500).json({error: 'Erro ao criar a tarefa', details: error.message});
+        res.status(500).json({ error: 'Erro ao criar a tarefa', details: error.message });
     }
 };
+
 
 /**
  * Obtém todas as tarefas.
@@ -116,7 +117,6 @@ export const getTarefasByStatus = async (req: Request, res: Response): Promise<v
     }
 };
 
-
 /**
  * Atualiza uma tarefa existente.
  *
@@ -132,38 +132,27 @@ export const getTarefasByStatus = async (req: Request, res: Response): Promise<v
  */
 export const updateTarefa = async (req: Request, res: Response): Promise<void> => {
     try {
-        // Obtém o ID da tarefa a ser atualizada e os novos dados do corpo da solicitação.
         const { id } = req.params;
         const { titulo, descricao, status } = req.body;
 
-        // Converte o ID para um número se necessário.
         const tarefaId = Number(id);
 
-        // Verifica se o ID é válido
         if (isNaN(tarefaId)) {
             res.status(400).json({ error: 'ID inválido' });
             return;
         }
 
-        // Atualiza a tarefa no banco de dados.
         const [updated] = await Tarefa.update(
             { titulo, descricao, status },
-            {
-                where: { id: tarefaId },
-                returning: true, // O retorno é opcional; pode ser removido se não precisar do objeto atualizado
-            }
+            { where: { id: tarefaId } }
         );
 
         if (updated) {
-            // Busca e retorna a tarefa atualizada.
-            const tarefa = await Tarefa.findByPk(tarefaId);
-            res.status(200).json(tarefa);
+            res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
         } else {
-            // Retorna erro se a tarefa não for encontrada.
             res.status(404).json({ error: 'Tarefa não encontrada' });
         }
     } catch (error: any) {
-        // Retorna erro se ocorrer algum problema ao atualizar a tarefa.
         res.status(500).json({ error: 'Erro ao atualizar a tarefa', details: error.message });
     }
 };
