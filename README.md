@@ -40,11 +40,6 @@ O banco de dados é gerenciado pelo Sequelize e utiliza o PostgreSQL. A tabela `
 - **`createdAt`**: Data de criação da tarefa (automaticamente definida pelo Sequelize).
 - **`updatedAt`**: Data da última atualização da tarefa (automaticamente definida pelo Sequelize).
 
-### Modelos e Interfaces
-
-- **`TarefaAttributes`**: Interface que define os atributos de uma tarefa.
-- **`TarefaCreationAttributes`**: Interface que define os atributos necessários para criar uma nova tarefa.
-
 ### Rotas da API
 
 As seguintes rotas estão disponíveis para interagir com o sistema de gerenciamento de tarefas:
